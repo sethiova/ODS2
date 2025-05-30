@@ -86,16 +86,25 @@ import Layout from '../layouts/Layout.astro';
             
             <div class="form-group">
               <label for="email">Correo electrónico *</label>
-              <input 
-                type="email" 
-                id="email" 
-                name="email" 
-                required
-                maxlength="254"
-                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                title="Formato de email válido"
-                autocomplete="email"
-              >
+              <div class="input-wrapper">
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  required
+                  maxlength="254"
+                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                  title="Formato de email válido"
+                  autocomplete="email"
+                >
+                <div class="validation-indicator" id="email-validation-indicator" style="display: none;">
+                  <span class="spinner">⟳</span>
+                  <span class="text">Verificando dominio...</span>
+                </div>
+              </div>
+              <div class="field-help">
+                <small>Verificamos que el dominio del email sea válido y no sea temporal</small>
+              </div>
               <div class="error-message" id="email-error"></div>
             </div>
           </div>
@@ -172,10 +181,11 @@ import Layout from '../layouts/Layout.astro';
             
             <!-- Widget de reCAPTCHA v2 -->
             <div class="recaptcha-widget">
-              <div id="recaptcha-widget" class="g-recaptcha" 
-                   data-sitekey="6LfAB1ArAAAAAJOnnsn4oWouICXdEweRGv3U7u5v"
-                   data-theme="light"
-                   data-size="normal">
+              <div class="g-recaptcha" 
+                   data-sitekey="6LdHEFArAAAAAISpCv9K0FtP5rPl-XbDfbTvLANG"
+                   data-callback="onRecaptchaSuccess"
+                   data-expired-callback="onRecaptchaExpired"
+                   data-error-callback="onRecaptchaError">
               </div>
             </div>
             
@@ -473,6 +483,50 @@ import Layout from '../layouts/Layout.astro';
     position: relative;
   }
 
+  .input-wrapper {
+    position: relative;
+  }
+
+  .validation-indicator {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+    background: white;
+    padding: 0 4px;
+  }
+
+  .validation-indicator .spinner {
+    animation: spin 1s linear infinite;
+    color: #2196f3;
+    font-size: 1rem;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .validation-indicator .text {
+    color: #2196f3;
+    font-weight: 500;
+  }
+
+  .field-help {
+    margin-top: 0.25rem;
+  }
+
+  .field-help small {
+    color: #666;
+    font-size: 0.8rem;
+    font-style: italic;
+  }
+
   .form-group label {
     display: block;
     margin-bottom: 0.5rem;
@@ -633,19 +687,63 @@ import Layout from '../layouts/Layout.astro';
 </style>
 
 <!-- reCAPTCHA v2 Script -->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad&render=explicit" async defer></script>
 
 <!-- EmailJS CDN -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
+<!-- Global reCAPTCHA callbacks -->
+<script is:inline>
+  // ✅ Callbacks globales para reCAPTCHA
+  window.onRecaptchaLoad = function() {
+    console.log('🔄 Cargando reCAPTCHA...');
+    const recaptchaElement = document.querySelector('.g-recaptcha');
+    
+    if (recaptchaElement && typeof grecaptcha !== 'undefined') {
+      try {
+        window.recaptchaWidgetId = grecaptcha.render(recaptchaElement, {
+          'sitekey': '6LdHEFArAAAAAISpCv9K0FtP5rPl-XbDfbTvLANG',
+          'callback': 'onRecaptchaSuccess',
+          'expired-callback': 'onRecaptchaExpired',
+          'error-callback': 'onRecaptchaError'
+        });
+        console.log('✅ reCAPTCHA cargado exitosamente');
+      } catch (error) {
+        console.error('❌ Error al cargar reCAPTCHA:', error);
+      }
+    } else {
+      console.error('❌ Elemento reCAPTCHA no encontrado');
+    }
+  };
+
+  window.onRecaptchaSuccess = function(token) {
+    console.log('✅ reCAPTCHA verificado:', token);
+    const event = new CustomEvent('recaptchaSuccess', { detail: token });
+    document.dispatchEvent(event);
+  };
+
+  window.onRecaptchaExpired = function() {
+    console.log('⚠️ reCAPTCHA expirado');
+    const event = new CustomEvent('recaptchaExpired');
+    document.dispatchEvent(event);
+  };
+
+  window.onRecaptchaError = function() {
+    console.log('❌ Error en reCAPTCHA');
+    const event = new CustomEvent('recaptchaError');
+    document.dispatchEvent(event);
+  };
+</script>
+
 <script>
 declare const grecaptcha: any;
 declare const emailjs: any;
+declare const recaptchaWidgetId: number;
 
 class AdvancedFormSecurity {
   private static instance: AdvancedFormSecurity;
   private lastSubmission: number = 0;
-  private readonly MIN_SUBMISSION_INTERVAL = 10000; // 10 segundos
+  private readonly MIN_SUBMISSION_INTERVAL = 10000;
 
   static getInstance(): AdvancedFormSecurity {
     if (!AdvancedFormSecurity.instance) {
@@ -657,7 +755,19 @@ class AdvancedFormSecurity {
   // ✅ Validación de reCAPTCHA v2
   validateRecaptcha(): { success: boolean; token?: string } {
     try {
-      const recaptchaResponse = grecaptcha.getResponse();
+      if (typeof grecaptcha === 'undefined') {
+        console.error('❌ reCAPTCHA no está cargado');
+        this.showFieldError('recaptcha', 'Error: reCAPTCHA no está disponible');
+        return { success: false };
+      }
+
+      if (typeof (window as any).recaptchaWidgetId === 'undefined') {
+        console.error('❌ Widget reCAPTCHA no inicializado');
+        this.showFieldError('recaptcha', 'Error: reCAPTCHA no está inicializado');
+        return { success: false };
+      }
+
+      const recaptchaResponse = grecaptcha.getResponse((window as any).recaptchaWidgetId);
       
       if (!recaptchaResponse || recaptchaResponse.length === 0) {
         this.showFieldError('recaptcha', 'Por favor, completa la verificación reCAPTCHA');
@@ -674,34 +784,28 @@ class AdvancedFormSecurity {
     }
   }
 
-  // Múltiples validaciones anti-bot
   performAdvancedBotDetection(): { success: boolean; reason?: string } {
-    // 1. Verificar tiempo de llenado del formulario
     const timestamp = parseInt((document.getElementById('form-timestamp') as HTMLInputElement)?.value || '0');
     const fillTime = Date.now() - timestamp;
     
-    if (fillTime < 5000) { // Menos de 5 segundos
+    if (fillTime < 5000) {
       return { success: false, reason: 'Formulario llenado demasiado rápido' };
     }
 
-    // 2. Verificar honeypot
     const honeypot = (document.getElementById('website') as HTMLInputElement)?.value;
     if (honeypot && honeypot.trim() !== '') {
       return { success: false, reason: 'Campo honeypot llenado' };
     }
 
-    // 3. Verificar patrones de navegador sospechosos
     if (!navigator.userAgent || navigator.userAgent.length < 20) {
       return { success: false, reason: 'User agent sospechoso' };
     }
 
-    // 4. Verificar que el formulario tenga interacciones reales
     const interactions = sessionStorage.getItem('form-interactions');
     if (!interactions || parseInt(interactions) < 3) {
       return { success: false, reason: 'Pocas interacciones del usuario' };
     }
 
-    // 5. Verificar rate limiting
     if (!this.canSubmit()) {
       return { success: false, reason: 'Demasiados envíos recientes' };
     }
@@ -728,6 +832,127 @@ class AdvancedFormSecurity {
     const div = document.createElement('div');
     div.textContent = input;
     return div.innerHTML;
+  }
+
+  // ✅ Validación avanzada de dominio de email
+  async validateEmailDomain(email: string): Promise<{ valid: boolean; message?: string }> {
+    try {
+      const domain = email.split('@')[1];
+      if (!domain) {
+        return { valid: false, message: 'Formato de email inválido' };
+      }
+
+      // Lista de dominios temporales/desechables conocidos
+      const disposableDomains = [
+        '10minutemail.com', 'guerrillamail.com', 'mailinator.com', 
+        'tempmail.org', 'temp-mail.org', 'yopmail.com', 'throwaway.email',
+        'dispostable.com', 'tempr.email', 'fake-mail.com', 'sharklasers.com'
+      ];
+
+      if (disposableDomains.includes(domain.toLowerCase())) {
+        return { valid: false, message: 'No se permiten correos temporales o desechables' };
+      }
+
+      // Verificar formato de dominio
+      if (!/^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(domain)) {
+        return { valid: false, message: 'Dominio de email inválido' };
+      }
+
+      // ✅ NUEVA VALIDACIÓN: Detectar errores tipográficos en dominios conocidos
+      const domainLower = domain.toLowerCase();
+      
+      // Mapeo de dominios correctos y sus variaciones incorrectas comunes
+      const domainTypos = {
+        'gmail.com': ['gmail.co', 'gmai.com', 'gmial.com', 'gmail.con', 'gmal.com', 'gamil.com'],
+        'outlook.com': ['outlook.co', 'outlok.com', 'outloook.com', 'outlook.con'],
+        'hotmail.com': ['hotmail.co', 'hotmai.com', 'hotmial.com', 'hotmail.con'],
+        'yahoo.com': ['yahoo.co', 'yaho.com', 'yahho.com', 'yahoo.con'],
+        'yahoo.es': ['yahoo.e', 'yaho.es', 'yahho.es'],
+        'icloud.com': ['icloud.co', 'iclou.com', 'icloude.com', 'icloud.con'],
+        'live.com': ['live.co', 'liv.com', 'live.con'],
+        'msn.com': ['msn.co', 'ms.com', 'msn.con'],
+        'aol.com': ['aol.co', 'ao.com', 'aol.con']
+      };
+
+      // Verificar si el dominio es una variación incorrecta de un dominio conocido
+      for (const [correctDomain, typos] of Object.entries(domainTypos)) {
+        if (typos.includes(domainLower)) {
+          return { 
+            valid: false, 
+            message: `¿Quisiste decir "${correctDomain}"? El dominio "${domain}" no es válido` 
+          };
+        }
+      }
+
+      // Lista de dominios válidos conocidos (los más comunes)
+      const commonDomains = [
+        'gmail.com', 'outlook.com', 'hotmail.com', 'yahoo.com', 'yahoo.es',
+        'icloud.com', 'me.com', 'protonmail.com', 'aol.com', 'live.com',
+        'msn.com', 'mail.com', 'zoho.com', 'yandex.com', 'gmx.com'
+      ];
+
+      if (commonDomains.includes(domainLower)) {
+        return { valid: true };
+      }
+
+      // ✅ VALIDACIÓN ADICIONAL: Verificar dominios que parecen ser de proveedores conocidos
+      // pero podrían ser intentos de phishing o errores tipográficos
+      const suspiciousPatterns = [
+        /^g[m]*ail\./, // Variaciones de gmail
+        /^out[l]*ook\./, // Variaciones de outlook
+        /^hot[m]*ail\./, // Variaciones de hotmail
+        /^ya[h]*oo\./, // Variaciones de yahoo
+        /^i[c]*loud\./, // Variaciones de icloud
+      ];
+
+      for (const pattern of suspiciousPatterns) {
+        if (pattern.test(domainLower) && !commonDomains.includes(domainLower)) {
+          return { 
+            valid: false, 
+            message: 'El dominio parece ser una variación incorrecta de un proveedor conocido. Verifica la ortografía.' 
+          };
+        }
+      }
+
+      // Para dominios no comunes, hacer una verificación básica
+      // Verificar que el dominio tenga al menos una estructura válida
+      const domainParts = domain.split('.');
+      if (domainParts.length < 2) {
+        return { valid: false, message: 'Dominio de email inválido' };
+      }
+
+      const tld = domainParts[domainParts.length - 1];
+      const validTlds = [
+        'com', 'org', 'net', 'edu', 'gov', 'mil', 'int', 'co', 'io', 'me', 'info',
+        'biz', 'name', 'pro', 'mx', 'es', 'ar', 'cl', 'pe', 'co', 'ec', 've', 'uy',
+        'py', 'bo', 'gt', 'hn', 'sv', 'ni', 'cr', 'pa', 'cu', 'do', 'pr'
+      ];
+
+      if (!validTlds.includes(tld.toLowerCase())) {
+        return { valid: false, message: 'Extensión de dominio no válida' };
+      }
+
+      // Verificar que no contenga caracteres sospechosos
+      if (/[^a-zA-Z0-9.-]/.test(domain)) {
+        return { valid: false, message: 'Dominio contiene caracteres no válidos' };
+      }
+
+      // ✅ VALIDACIÓN ADICIONAL: Verificar que no sea demasiado corto o sospechoso
+      const domainName = domainParts[0];
+      if (domainName.length < 2) {
+        return { valid: false, message: 'Nombre de dominio demasiado corto' };
+      }
+
+      // Verificar secuencias sospechosas (como muchas consonantes seguidas)
+      if (/[bcdfghjklmnpqrstvwxyz]{5,}/i.test(domainName)) {
+        return { valid: false, message: 'El dominio parece ser inválido o generado automáticamente' };
+      }
+
+      return { valid: true };
+    } catch (error) {
+      console.error('Error validando dominio de email:', error);
+      return { valid: false, message: 'Error al validar el dominio del email' };
+    }
   }
 
   showFieldError(fieldName: string, errorMessage: string): void {
@@ -779,6 +1004,41 @@ class AdvancedFormSecurity {
         } else if (value.length > 254) {
           isValid = false;
           errorMessage = 'Email demasiado largo';
+        } else {
+          // Mostrar indicador de validación
+          const indicator = document.getElementById('email-validation-indicator');
+          if (indicator) {
+            indicator.style.display = 'flex';
+          }
+          
+          // Validación de dominio asíncrona
+          this.validateEmailDomain(value).then(result => {
+            const indicator = document.getElementById('email-validation-indicator');
+            if (indicator) {
+              indicator.style.display = 'none';
+            }
+            
+            if (!result.valid) {
+              this.showFieldError('email', result.message || 'Dominio de email no válido');
+              field.classList.add('invalid');
+              field.classList.remove('valid');
+              this.checkFormCompleteness();
+            } else {
+              this.hideFieldError('email');
+              field.classList.remove('invalid');
+              field.classList.add('valid');
+              this.checkFormCompleteness();
+            }
+          }).catch(error => {
+            console.error('Error en validación de email:', error);
+            const indicator = document.getElementById('email-validation-indicator');
+            if (indicator) {
+              indicator.style.display = 'none';
+            }
+            this.showFieldError('email', 'Error al validar el email');
+            field.classList.add('invalid');
+            field.classList.remove('valid');
+          });
         }
         break;
 
@@ -828,10 +1088,10 @@ class AdvancedFormSecurity {
   }
 
   async validateForm(form: HTMLFormElement): Promise<boolean> {
-    // 1. Validaciones básicas de campos
     const fields = form.querySelectorAll('input[required], select[required], textarea[required]');
     let allValid = true;
 
+    // Validación básica de campos
     fields.forEach(field => {
       const isValid = this.validateField(field as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement);
       if (!isValid) allValid = false;
@@ -841,17 +1101,28 @@ class AdvancedFormSecurity {
       return false;
     }
 
-    // 2. Verificación de reCAPTCHA v2
+    // Validación especial para email (verificar dominio)
+    const emailField = form.querySelector('input[name="email"]') as HTMLInputElement;
+    if (emailField && emailField.value.trim()) {
+      const emailValidation = await this.validateEmailDomain(emailField.value.trim());
+      if (!emailValidation.valid) {
+        this.showFieldError('email', emailValidation.message || 'Dominio de email no válido');
+        emailField.classList.add('invalid');
+        emailField.classList.remove('valid');
+        emailField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return false;
+      }
+    }
+
     const recaptchaResult = this.validateRecaptcha();
     if (!recaptchaResult.success) {
-      const recaptchaWidget = document.getElementById('recaptcha-widget');
+      const recaptchaWidget = document.querySelector('.g-recaptcha');
       if (recaptchaWidget) {
         recaptchaWidget.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
       return false;
     }
 
-    // 3. Detección avanzada de bots
     const botCheck = this.performAdvancedBotDetection();
     if (!botCheck.success) {
       console.warn('🚨 Bot detectado:', botCheck.reason);
@@ -889,52 +1160,53 @@ class AdvancedFormSecurity {
       }
     });
 
-    // También verificar reCAPTCHA
-    const recaptchaResponse = grecaptcha && grecaptcha.getResponse ? grecaptcha.getResponse() : '';
-    const recaptchaValid = recaptchaResponse && recaptchaResponse.length > 0;
+    let recaptchaValid = false;
+    try {
+      if (typeof grecaptcha !== 'undefined' && typeof (window as any).recaptchaWidgetId !== 'undefined') {
+        const recaptchaResponse = grecaptcha.getResponse((window as any).recaptchaWidgetId);
+        recaptchaValid = recaptchaResponse && recaptchaResponse.length > 0;
+      }
+    } catch (error) {
+      console.warn('Error verificando reCAPTCHA:', error);
+    }
     
     submitBtn.disabled = !(allFilled && recaptchaValid);
   }
 }
 
-// ✅ Callback global requerido para reCAPTCHA
-function onRecaptchaLoad() {
-  console.log('✅ reCAPTCHA cargado');
-  const security = AdvancedFormSecurity.getInstance();
-  security.checkFormCompleteness();
-}
-
-function onRecaptchaExpired() {
-  console.log('⚠️ reCAPTCHA expirado');
-  const security = AdvancedFormSecurity.getInstance();
-  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
-  if (submitBtn) {
-    submitBtn.disabled = true;
-  }
-  security.showFieldError('recaptcha', 'La verificación ha expirado. Por favor, complétala nuevamente.');
-}
-
-function onRecaptchaError() {
-  console.log('❌ Error en reCAPTCHA');
-  const security = AdvancedFormSecurity.getInstance();
-  security.showFieldError('recaptcha', 'Error en la verificación. Por favor, recarga la página.');
-}
-
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('🔄 Inicializando formulario con reCAPTCHA v2...');
+  console.log('🔄 Inicializando formulario...');
   
   const security = AdvancedFormSecurity.getInstance();
   
-  // Initialize form timestamp
+  // Event listeners para reCAPTCHA
+  document.addEventListener('recaptchaSuccess', function(event: any) {
+    console.log('✅ reCAPTCHA verificado desde evento:', event.detail);
+    security.hideFieldError('recaptcha');
+    security.checkFormCompleteness();
+  });
+
+  document.addEventListener('recaptchaExpired', function() {
+    console.log('⚠️ reCAPTCHA expirado desde evento');
+    const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+    if (submitBtn) {
+      submitBtn.disabled = true;
+    }
+    security.showFieldError('recaptcha', 'La verificación ha expirado. Por favor, complétala nuevamente.');
+  });
+
+  document.addEventListener('recaptchaError', function() {
+    console.log('❌ Error en reCAPTCHA desde evento');
+    security.showFieldError('recaptcha', 'Error en la verificación. Por favor, recarga la página.');
+  });
+  
   const timestampField = document.getElementById('form-timestamp') as HTMLInputElement;
   if (timestampField) {
     timestampField.value = Date.now().toString();
   }
 
-  // Initialize session interaction counter
   sessionStorage.setItem('form-interactions', '0');
 
-  // Character counter for textarea
   const mensajeField = document.getElementById('mensaje') as HTMLTextAreaElement;
   const charCount = document.getElementById('char-count');
   if (mensajeField && charCount) {
@@ -953,7 +1225,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Real-time validation
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
   
@@ -991,7 +1262,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Handle form submission
   const checkEmailJS = () => {
     if (typeof emailjs !== 'undefined') {
       emailjs.init("lq3Fwom4Xr_iebBxS");
@@ -1022,7 +1292,7 @@ document.addEventListener('DOMContentLoaded', function() {
           if (errorMessage) errorMessage.style.display = 'none';
           
           const formData = new FormData(this);
-          const recaptchaToken = grecaptcha.getResponse();
+          const recaptchaToken = grecaptcha.getResponse((window as any).recaptchaWidgetId);
           
           const templateParams = {
             from_name: security.sanitizeInput(formData.get('nombre') as string),
@@ -1049,7 +1319,9 @@ document.addEventListener('DOMContentLoaded', function() {
               }
               
               form.reset();
-              grecaptcha.reset(); // Reset reCAPTCHA
+              if (typeof grecaptcha !== 'undefined' && typeof (window as any).recaptchaWidgetId !== 'undefined') {
+                grecaptcha.reset((window as any).recaptchaWidgetId);
+              }
               
               form.querySelectorAll('.error-message').forEach(errorEl => {
                 errorEl.classList.remove('show');
@@ -1060,7 +1332,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 field.classList.remove('valid', 'invalid');
               });
               
-              // Reset security measures
               if (timestampField) {
                 timestampField.value = Date.now().toString();
               }
@@ -1084,34 +1355,6 @@ document.addEventListener('DOMContentLoaded', function() {
   };
   
   checkEmailJS();
-
-  // Setup reCAPTCHA callbacks when it loads
-  const setupRecaptchaCallbacks = () => {
-    if (typeof grecaptcha !== 'undefined' && grecaptcha.render) {
-      const recaptchaWidget = document.getElementById('recaptcha-widget');
-      if (recaptchaWidget && !recaptchaWidget.querySelector('.g-recaptcha > div')) {
-        try {
-          grecaptcha.render('recaptcha-widget', {
-            'sitekey': '6LfAB1ArAAAAAJOnnsn4oWouICXdEweRGv3U7u5v',
-            'callback': function(token: string) {
-              console.log('✅ reCAPTCHA verificado:', token);
-              security.hideFieldError('recaptcha');
-              security.checkFormCompleteness();
-            },
-            'expired-callback': onRecaptchaExpired,
-            'error-callback': onRecaptchaError
-          });
-        } catch (error) {
-          console.error('Error al configurar reCAPTCHA:', error);
-        }
-      }
-    } else {
-      setTimeout(setupRecaptchaCallbacks, 500);
-    }
-  };
-
-  setupRecaptchaCallbacks();
-
-  console.log('✅ Formulario con reCAPTCHA v2 inicializado');
+  console.log('✅ Formulario inicializado');
 });
 </script>
