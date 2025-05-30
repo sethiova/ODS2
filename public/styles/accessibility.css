@@ -67,8 +67,14 @@
   color: #e0e0e0 !important;
 }
 
-/* ALTO CONTRASTE */
-.accessibility-high-contrast {
+/* ALTO CONTRASTE - APLICADO SELECTIVAMENTE */
+.accessibility-high-contrast main,
+.accessibility-high-contrast header,
+.accessibility-high-contrast footer,
+.accessibility-high-contrast nav,
+.accessibility-high-contrast section,
+.accessibility-high-contrast article,
+.accessibility-high-contrast aside {
   filter: contrast(200%) brightness(130%) saturate(150%) !important;
 }
 
@@ -83,9 +89,27 @@
   font-weight: bold !important;
 }
 
-/* FILTRO PARA DALTONISMO */
-.accessibility-daltonism-filter {
+/* Excluir botón flotante del filtro de alto contraste */
+.accessibility-high-contrast #floating-accessibility-button,
+.accessibility-high-contrast .floating-accessibility-btn {
+  filter: none !important;
+}
+
+/* FILTRO PARA DALTONISMO - APLICADO SELECTIVAMENTE */
+.accessibility-daltonism-filter main,
+.accessibility-daltonism-filter header,
+.accessibility-daltonism-filter footer,
+.accessibility-daltonism-filter nav,
+.accessibility-daltonism-filter section,
+.accessibility-daltonism-filter article,
+.accessibility-daltonism-filter aside {
   filter: sepia(100%) hue-rotate(15deg) saturate(150%) contrast(120%) !important;
+}
+
+/* Excluir botón flotante del filtro de daltonismo */
+.accessibility-daltonism-filter #floating-accessibility-button,
+.accessibility-daltonism-filter .floating-accessibility-btn {
+  filter: none !important;
 }
 
 /* CURSOR GRANDE */
