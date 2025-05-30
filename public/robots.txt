@@ -1,0 +1,31 @@
+User-agent: *
+Disallow: /src/
+Disallow: /public/scripts/
+Disallow: /node_modules/
+Disallow: /.astro/
+Disallow: /dist/
+Disallow: /.git/
+Disallow: /.env
+Disallow: /package.json
+Disallow: /package-lock.json
+Disallow: /astro.config.mjs
+Disallow: /tsconfig.json
+Disallow: /README.md
+Disallow: /.htaccess
+Disallow: /config/
+Disallow: /admin/
+Disallow: /test/
+Disallow: /tmp/
+Disallow: /backup/
+
+# Permitir archivos específicos
+Allow: /styles/global.css
+Allow: /styles/accessibility.css
+Allow: /images/
+Allow: /favicon.svg
+
+# Sitemap
+Sitemap: https://tu-dominio.com/sitemap.xml
+
+# Crawl-delay para evitar sobrecarga
+Crawl-delay: 1

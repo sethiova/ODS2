@@ -1,0 +1,1332 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Recursos - ODS 2 Hambre Cero" description="Recursos completos sobre el Objetivo de Desarrollo Sostenible 2: Hambre Cero">
+  
+  <main class="resources-page">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-content">
+          <h1 class="hero-title">📚 Recursos sobre ODS 2</h1>
+          <p class="hero-subtitle">Documentos, organizaciones y herramientas para combatir el hambre mundial</p>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-number">828M</span>
+              <span class="stat-label">Personas con hambre</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">3.1B</span>
+              <span class="stat-label">Sin acceso a dieta saludable</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">149M</span>
+              <span class="stat-label">Niños con retraso del crecimiento</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Filtros de recursos -->
+      <section class="filters-section">
+        <h2>🔍 Explorar por categoría</h2>
+        <div class="filter-buttons">
+          <button class="filter-btn active" data-category="all">Todos</button>
+          <button class="filter-btn" data-category="organizations">Organizaciones</button>
+          <button class="filter-btn" data-category="documents">Documentos</button>
+          <button class="filter-btn" data-category="data">Datos y Estadísticas</button>
+          <button class="filter-btn" data-category="tools">Herramientas</button>
+          <button class="filter-btn" data-category="reports">Informes</button>
+          <button class="filter-btn" data-category="initiatives">Iniciativas</button>
+        </div>
+      </section>
+
+      <!-- Organizaciones Internacionales -->
+      <section class="resource-category" data-category="organizations">
+        <div class="category-header">
+          <h2>🏛️ Organizaciones Internacionales</h2>
+          <p>Principales instituciones que lideran la lucha contra el hambre mundial</p>
+        </div>
+        
+        <div class="resources-grid">
+          <div class="resource-card featured">
+            <div class="card-header">
+              <img src="/images/fao-logo.png" alt="FAO Logo" class="org-logo" onerror="this.style.display='none'">
+              <div class="card-title-group">
+                <h3>FAO - Organización de las Naciones Unidas para la Alimentación y la Agricultura</h3>
+                <span class="card-type">Organización Líder</span>
+              </div>
+            </div>
+            <p class="card-description">
+              La FAO es la agencia especializada de las Naciones Unidas que lidera los esfuerzos internacionales para vencer el hambre y lograr la seguridad alimentaria.
+            </p>
+            <div class="card-features">
+              <span class="feature-tag">📊 Estadísticas Globales</span>
+              <span class="feature-tag">📖 Políticas Alimentarias</span>
+              <span class="feature-tag">🌾 Agricultura Sostenible</span>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.fao.org/hunger/es/" target="_blank" class="btn btn-primary">
+                Visitar Sitio Web
+                <span class="btn-icon">🔗</span>
+              </a>
+              <a href="https://www.fao.org/publications/fao-flagship-publications/the-state-of-food-security-and-nutrition-in-the-world/es" target="_blank" class="btn btn-secondary">
+                Estado Mundial
+              </a>
+            </div>
+          </div>
+
+          <div class="resource-card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>Programa Mundial de Alimentos (WFP)</h3>
+                <span class="card-type">Asistencia Alimentaria</span>
+              </div>
+            </div>
+            <p class="card-description">
+              La mayor organización humanitaria del mundo que lucha contra el hambre, proporcionando asistencia alimentaria en emergencias.
+            </p>
+            <div class="card-features">
+              <span class="feature-tag">🆘 Emergencias</span>
+              <span class="feature-tag">🍽️ Alimentación Escolar</span>
+              <span class="feature-tag">👥 Asistencia Humanitaria</span>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.wfp.org/es" target="_blank" class="btn btn-primary">Explorar WFP</a>
+            </div>
+          </div>
+
+          <div class="resource-card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>IFAD - Fondo Internacional de Desarrollo Agrícola</h3>
+                <span class="card-type">Desarrollo Rural</span>
+              </div>
+            </div>
+            <p class="card-description">
+              Agencia especializada de la ONU dedicada a erradicar la pobreza rural y el hambre en países en desarrollo.
+            </p>
+            <div class="card-features">
+              <span class="feature-tag">🚜 Desarrollo Rural</span>
+              <span class="feature-tag">💰 Microfinanzas</span>
+              <span class="feature-tag">👩‍🌾 Agricultura Familiar</span>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.ifad.org/es/" target="_blank" class="btn btn-primary">Conocer IFAD</a>
+            </div>
+          </div>
+
+          <div class="resource-card">
+            <div class="card-header">
+              <div class="card-title-group">
+                <h3>UNICEF - Nutrición Infantil</h3>
+                <span class="card-type">Infancia</span>
+              </div>
+            </div>
+            <p class="card-description">
+              Programas de UNICEF enfocados en la nutrición infantil y la prevención de la malnutrición.
+            </p>
+            <div class="card-features">
+              <span class="feature-tag">👶 Nutrición Infantil</span>
+              <span class="feature-tag">🍼 Lactancia Materna</span>
+              <span class="feature-tag">📏 Crecimiento</span>
+            </div>
+            <div class="card-actions">
+              <a href="https://www.unicef.org/es/nutricion" target="_blank" class="btn btn-primary">Ver Programas</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Documentos y Políticas -->
+      <section class="resource-category" data-category="documents">
+        <div class="category-header">
+          <h2>📄 Documentos y Políticas</h2>
+          <p>Marco normativo y documentos oficiales sobre seguridad alimentaria</p>
+        </div>
+        
+        <div class="resources-grid">
+          <div class="resource-card document-card">
+            <div class="document-icon">📋</div>
+            <h3>Agenda 2030 - ODS 2</h3>
+            <p>Documento oficial de las Naciones Unidas que establece las metas para lograr el Hambre Cero.</p>
+            <div class="document-meta">
+              <span class="meta-item">📅 2015</span>
+              <span class="meta-item">🌐 193 países</span>
+              <span class="meta-item">📖 PDF</span>
+            </div>
+            <a href="https://www.un.org/sustainabledevelopment/es/hunger/" target="_blank" class="btn btn-outline">
+              Descargar PDF
+            </a>
+          </div>
+
+          <div class="resource-card document-card">
+            <div class="document-icon">📊</div>
+            <h3>Estado de la Seguridad Alimentaria y la Nutrición en el Mundo 2023</h3>
+            <p>Informe anual conjunto de FAO, IFAD, UNICEF, WFP y WHO sobre el hambre mundial.</p>
+            <div class="document-meta">
+              <span class="meta-item">📅 2023</span>
+              <span class="meta-item">📈 Estadísticas</span>
+              <span class="meta-item">📖 250 páginas</span>
+            </div>
+            <a href="https://www.fao.org/state-of-food-security-nutrition" target="_blank" class="btn btn-outline">
+              Ver Informe
+            </a>
+          </div>
+
+          <div class="resource-card document-card">
+            <div class="document-icon">🎯</div>
+            <h3>Directrices Voluntarias sobre Seguridad Alimentaria</h3>
+            <p>Marco de referencia para la implementación progresiva del derecho a una alimentación adecuada.</p>
+            <div class="document-meta">
+              <span class="meta-item">⚖️ Derecho</span>
+              <span class="meta-item">🏛️ Gobierno</span>
+              <span class="meta-item">📋 Guías</span>
+            </div>
+            <a href="https://www.fao.org/fileadmin/templates/righttofood/documents/RTF_publications/ES/RightToFood_Guidelines_ES.pdf" target="_blank" class="btn btn-outline">
+              Consultar
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Datos y Estadísticas -->
+      <section class="resource-category" data-category="data">
+        <div class="category-header">
+          <h2>📊 Datos y Estadísticas</h2>
+          <p>Información cuantitativa actualizada sobre el hambre mundial</p>
+        </div>
+        
+        <div class="stats-dashboard">
+          <div class="stat-card critical">
+            <div class="stat-icon">🚨</div>
+            <div class="stat-content">
+              <h3>828 millones</h3>
+              <p>Personas padecen hambre en el mundo (2021)</p>
+              <span class="stat-trend up">+46M desde 2020</span>
+            </div>
+          </div>
+
+          <div class="stat-card warning">
+            <div class="stat-icon">⚠️</div>
+            <div class="stat-content">
+              <h3>3.1 mil millones</h3>
+              <p>No pueden permitirse una dieta saludable</p>
+              <span class="stat-trend stable">Estable</span>
+            </div>
+          </div>
+
+          <div class="stat-card info">
+            <div class="stat-icon">👶</div>
+            <div class="stat-content">
+              <h3>149 millones</h3>
+              <p>Niños menores de 5 años con retraso del crecimiento</p>
+              <span class="stat-trend down">-10M desde 2015</span>
+            </div>
+          </div>
+
+          <div class="stat-card info">
+            <div class="stat-icon">⚖️</div>
+            <div class="stat-content">
+              <h3>45 millones</h3>
+              <p>Niños menores de 5 años con emaciación</p>
+              <span class="stat-trend up">+5M desde 2020</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="data-sources">
+          <h3>🔗 Fuentes de Datos Confiables</h3>
+          <div class="sources-grid">
+            <a href="https://www.fao.org/faostat/es/" target="_blank" class="source-link">
+              <span class="source-icon">📈</span>
+              <span class="source-name">FAOSTAT</span>
+              <span class="source-desc">Base de datos estadísticos de la FAO</span>
+            </a>
+            <a href="https://hungermap.wfp.org/" target="_blank" class="source-link">
+              <span class="source-icon">🗺️</span>
+              <span class="source-name">HungerMap LIVE</span>
+              <span class="source-desc">Mapa en tiempo real del hambre</span>
+            </a>
+            <a href="https://www.who.int/data/gho/data/themes/topics/joint-child-malnutrition-estimates-unicef-who-wb" target="_blank" class="source-link">
+              <span class="source-icon">👶</span>
+              <span class="source-name">WHO Malnutrition Data</span>
+              <span class="source-desc">Estimaciones de malnutrición infantil</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Herramientas y Recursos Prácticos -->
+      <section class="resource-category" data-category="tools">
+        <div class="category-header">
+          <h2>🛠️ Herramientas Prácticas</h2>
+          <p>Recursos para implementar acciones contra el hambre</p>
+        </div>
+        
+        <div class="tools-grid">
+          <div class="tool-card">
+            <div class="tool-header">
+              <span class="tool-icon">🧮</span>
+              <h3>Calculadora de Huella Alimentaria</h3>
+            </div>
+            <p>Herramienta para calcular el impacto ambiental de tu alimentación.</p>
+            <div class="tool-features">
+              <span class="feature">📊 Análisis Personal</span>
+              <span class="feature">🌱 Impacto Ambiental</span>
+              <span class="feature">💡 Recomendaciones</span>
+            </div>
+            <a href="https://myemissions.co/resources/food-carbon-footprint-calculator/" target="_blank" class="btn btn-tool">
+              Usar Herramienta
+            </a>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-header">
+              <span class="tool-icon">📱</span>
+              <h3>ShareTheMeal App</h3>
+            </div>
+            <p>Aplicación del WFP para donar comidas con solo tocar tu teléfono.</p>
+            <div class="tool-features">
+              <span class="feature">💝 Donaciones Fáciles</span>
+              <span class="feature">👥 Impacto Social</span>
+              <span class="feature">📈 Seguimiento</span>
+            </div>
+            <a href="https://sharethemeal.org/es/" target="_blank" class="btn btn-tool">
+              Descargar App
+            </a>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-header">
+              <span class="tool-icon">🎓</span>
+              <h3>Curso Online: Seguridad Alimentaria</h3>
+            </div>
+            <p>Curso gratuito sobre conceptos fundamentales de seguridad alimentaria.</p>
+            <div class="tool-features">
+              <span class="feature">🆓 Gratuito</span>
+              <span class="feature">🕐 4 semanas</span>
+              <span class="feature">🏆 Certificado</span>
+            </div>
+            <a href="https://www.futurelearn.com/courses/food-security" target="_blank" class="btn btn-tool">
+              Inscribirse
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Iniciativas y Programas -->
+      <section class="resource-category" data-category="initiatives">
+        <div class="category-header">
+          <h2>🌟 Iniciativas Destacadas</h2>
+          <p>Programas innovadores que están haciendo la diferencia</p>
+        </div>
+        
+        <div class="initiatives-timeline">
+          <div class="timeline-item">
+            <div class="timeline-marker">🏫</div>
+            <div class="timeline-content">
+              <h3>Programa de Alimentación Escolar</h3>
+              <p class="timeline-org">WFP</p>
+              <p>Proporciona comidas nutritivas a 418 millones de niños en edad escolar en 115 países.</p>
+              <span class="timeline-impact">418M niños beneficiados</span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">🌾</div>
+            <div class="timeline-content">
+              <h3>Iniciativa Mano de la Mano</h3>
+              <p class="timeline-org">FAO</p>
+              <p>Acelera la transformación agrícola y el desarrollo rural sostenible en países prioritarios.</p>
+              <span class="timeline-impact">50 países participantes</span>
+            </div>
+          </div>
+
+          <div class="timeline-item">
+            <div class="timeline-marker">💰</div>
+            <div class="timeline-content">
+              <h3>Fondo de Adaptación al Cambio Climático</h3>
+              <p class="timeline-org">IFAD</p>
+              <p>Apoyo financiero para que pequeños agricultores se adapten al cambio climático.</p>
+              <span class="timeline-impact">$500M comprometidos</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Informes y Publicaciones -->
+      <section class="resource-category" data-category="reports">
+        <div class="category-header">
+          <h2>📚 Informes y Publicaciones</h2>
+          <p>Investigación y análisis especializado sobre el ODS 2</p>
+        </div>
+        
+        <div class="reports-list">
+          <div class="report-item">
+            <div class="report-meta">
+              <span class="report-year">2023</span>
+              <span class="report-type">Informe Anual</span>
+            </div>
+            <div class="report-content">
+              <h3>El Estado de la Seguridad Alimentaria y la Nutrición en el Mundo 2023</h3>
+              <p>Análisis comprensivo del progreso hacia el ODS 2 y los desafíos persistentes.</p>
+              <div class="report-tags">
+                <span class="tag">FAO</span>
+                <span class="tag">WFP</span>
+                <span class="tag">UNICEF</span>
+                <span class="tag">WHO</span>
+                <span class="tag">IFAD</span>
+              </div>
+            </div>
+            <a href="https://www.fao.org/state-of-food-security-nutrition" target="_blank" class="report-link">
+              Leer Informe →
+            </a>
+          </div>
+
+          <div class="report-item">
+            <div class="report-meta">
+              <span class="report-year">2023</span>
+              <span class="report-type">Estudio</span>
+            </div>
+            <div class="report-content">
+              <h3>Costo y Asequibilidad de Dietas Saludables</h3>
+              <p>Análisis económico sobre el acceso a alimentación nutritiva a nivel global.</p>
+              <div class="report-tags">
+                <span class="tag">FAO</span>
+                <span class="tag">Economía</span>
+                <span class="tag">Nutrición</span>
+              </div>
+            </div>
+            <a href="https://www.fao.org/documents/card/en/c/cc3859en/" target="_blank" class="report-link">
+              Descargar →
+            </a>
+          </div>
+
+          <div class="report-item">
+            <div class="report-meta">
+              <span class="report-year">2023</span>
+              <span class="report-type">Guía</span>
+            </div>
+            <div class="report-content">
+              <h3>Transformar los Sistemas Alimentarios para la Seguridad Alimentaria</h3>
+              <p>Guía práctica para gobiernos y organizaciones sobre políticas alimentarias.</p>
+              <div class="report-tags">
+                <span class="tag">Políticas</span>
+                <span class="tag">Sistemas Alimentarios</span>
+                <span class="tag">Gobierno</span>
+              </div>
+            </div>
+            <a href="https://www.fao.org/policy-support/tools-and-publications" target="_blank" class="report-link">
+              Explorar →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="cta-section">
+        <div class="cta-content">
+          <h2>🤝 Únete a la Lucha contra el Hambre</h2>
+          <p>Cada acción cuenta. Desde donaciones hasta cambios en tu estilo de vida, puedes hacer la diferencia.</p>
+          <div class="cta-actions">
+            <a href="https://sharethemeal.org/es/" target="_blank" class="btn btn-primary btn-large">
+              Donar una Comida
+              <span class="btn-icon">❤️</span>
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .resources-page {
+    background: linear-gradient(180deg, #f8fdff 0%, #ffffff 100%);
+    min-height: 100vh;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+    color: white;
+    padding: 4rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    opacity: 0.3;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 3rem;
+    opacity: 0.95;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .stat-item {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    text-align: center;
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+
+  /* Filters */
+  .filters-section {
+    padding: 3rem 0 2rem;
+    text-align: center;
+  }
+
+  .filters-section h2 {
+    margin-bottom: 2rem;
+    color: #1565c0;
+  }
+
+  .filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .filter-btn {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    color: #495057;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: #1565c0;
+    border-color: #1565c0;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.3);
+  }
+
+  /* Category Sections */
+  .resource-category {
+    margin-bottom: 4rem;
+    transition: all 0.3s ease;
+  }
+
+  .resource-category.hidden {
+    display: none;
+  }
+
+  .category-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .category-header h2 {
+    color: #1565c0;
+    margin-bottom: 1rem;
+  }
+
+  .category-header p {
+    color: #6c757d;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* Resource Cards */
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .resource-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .resource-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #1565c0, #42a5f5);
+  }
+
+  .resource-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+  }
+
+  .resource-card.featured {
+    background: linear-gradient(135deg, #f8fdff 0%, #e3f2fd 100%);
+    border: 2px solid #1565c0;
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .org-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .card-title-group h3 {
+    margin: 0 0 0.5rem 0;
+    color: #1565c0;
+    font-size: 1.2rem;
+    line-height: 1.3;
+  }
+
+  .card-type {
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .card-description {
+    color: #495057;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .feature-tag {
+    background: #f8f9fa;
+    color: #495057;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+
+  .card-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  /* Document Cards */
+  .document-card {
+    text-align: center;
+  }
+
+  .document-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .document-meta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    background: #f8f9fa;
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    color: #6c757d;
+  }
+
+  /* Stats Dashboard */
+  .stats-dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    border-left: 4px solid;
+  }
+
+  .stat-card.critical {
+    border-left-color: #dc3545;
+  }
+
+  .stat-card.warning {
+    border-left-color: #ffc107;
+  }
+
+  .stat-card.info {
+    border-left-color: #17a2b8;
+  }
+
+  .stat-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .stat-content h3 {
+    margin: 0 0 0.5rem 0;
+    color: #343a40;
+    font-size: 1.5rem;
+  }
+
+  .stat-content p {
+    margin: 0 0 0.5rem 0;
+    color: #6c757d;
+  }
+
+  .stat-trend {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+  }
+
+  .stat-trend.up {
+    background: #f8d7da;
+    color: #721c24;
+  }
+
+  .stat-trend.down {
+    background: #d4edda;
+    color: #155724;
+  }
+
+  .stat-trend.stable {
+    background: #fff3cd;
+    color: #856404;
+  }
+
+  /* Data Sources */
+  .data-sources {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+
+  .data-sources h3 {
+    color: #1565c0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .sources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+
+  .source-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #495057;
+    transition: all 0.3s ease;
+  }
+
+  .source-link:hover {
+    background: #e9ecef;
+    transform: translateX(4px);
+  }
+
+  .source-icon {
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .source-name {
+    font-weight: 600;
+    color: #1565c0;
+    display: block;
+  }
+
+  .source-desc {
+    font-size: 0.9rem;
+    color: #6c757d;
+    display: block;
+  }
+
+  /* Tools Grid */
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .tool-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .tool-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+
+  .tool-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .tool-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .tool-features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .tool-features .feature {
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+  }
+
+  /* Timeline */
+  .initiatives-timeline {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 1.5rem;
+    top: 3rem;
+    bottom: -2rem;
+    width: 2px;
+    background: #e9ecef;
+  }
+
+  .timeline-marker {
+    width: 3rem;
+    height: 3rem;
+    background: #1565c0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+  }
+
+  .timeline-content {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    flex: 1;
+  }
+
+  .timeline-content h3 {
+    margin: 0 0 0.5rem 0;
+    color: #1565c0;
+  }
+
+  .timeline-org {
+    color: #6c757d;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0 0 1rem 0;
+  }
+
+  .timeline-impact {
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 0.3rem 0.6rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-top: 0.5rem;
+  }
+
+  /* Reports List */
+  .reports-list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .report-item {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+
+  .report-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  }
+
+  .report-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .report-year {
+    background: #1565c0;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .report-type {
+    background: #f8f9fa;
+    color: #6c757d;
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .report-content h3 {
+    margin: 0 0 0.5rem 0;
+    color: #343a40;
+  }
+
+  .report-content p {
+    margin: 0 0 1rem 0;
+    color: #6c757d;
+  }
+
+  .report-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    font-weight: 500;
+  }
+
+  .report-link {
+    color: #1565c0;
+    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .report-link:hover {
+    background: #e3f2fd;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: linear-gradient(135deg, #1565c0 0%, #42a5f5 100%);
+    color: white;
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    text-align: center;
+    margin: 4rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M20 20c0 11.046-8.954 20-20 20s-20-8.954-20-20 8.954-20 20-20 20 8.954 20 20z'/%3E%3C/g%3E%3C/svg%3E") repeat;
+    opacity: 0.1;
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-size: 0.9rem;
+  }
+
+  .btn-primary {
+    background: #1565c0;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #0d47a1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(21, 101, 192, 0.4);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: #1565c0;
+    border-color: #1565c0;
+  }
+
+  .btn-secondary:hover {
+    background: #1565c0;
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: #6c757d;
+    border-color: #6c757d;
+  }
+
+  .btn-outline:hover {
+    background: #6c757d;
+    color: white;
+  }
+
+  .btn-tool {
+    background: #28a745;
+    color: white;
+  }
+
+  .btn-tool:hover {
+    background: #218838;
+    transform: translateY(-2px);
+  }
+
+  .btn-large {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+
+  .btn-icon {
+    font-size: 1.1rem;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-stats {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .resources-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-dashboard {
+      grid-template-columns: 1fr;
+    }
+
+    .tools-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .sources-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .filter-buttons {
+      gap: 0.5rem;
+    }
+
+    .filter-btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+
+    .report-item {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      text-align: center;
+    }
+
+    .timeline-item {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .timeline-item::after {
+      display: none;
+    }
+
+    .card-actions {
+      justify-content: center;
+    }
+
+    .cta-content h2 {
+      font-size: 2rem;
+    }
+
+    .cta-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn-large {
+      width: 100%;
+      max-width: 300px;
+      justify-content: center;
+    }
+  }
+
+  /* Animaciones */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .resource-card,
+  .stat-card,
+  .tool-card,
+  .timeline-item,
+  .report-item {
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  /* Focus states para accesibilidad */
+  .filter-btn:focus,
+  .btn:focus,
+  .source-link:focus,
+  .report-link:focus {
+    outline: 3px solid #81c784;
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Sistema de filtros
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const resourceCategories = document.querySelectorAll('.resource-category');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', function(this: HTMLButtonElement) {
+        const targetCategory = this.dataset.category;
+        
+        // Actualizar botones activos
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        // Mostrar/ocultar categorías
+        resourceCategories.forEach(category => {
+          const categoryElement = category as HTMLElement;
+          if (targetCategory === 'all' || categoryElement.dataset.category === targetCategory) {
+            category.classList.remove('hidden');
+            categoryElement.style.display = 'block';
+          } else {
+            category.classList.add('hidden');
+            setTimeout(() => {
+              if (category.classList.contains('hidden')) {
+                categoryElement.style.display = 'none';
+              }
+            }, 300);
+          }
+        });
+      });
+    });
+
+    // Animación de entrada para elementos
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).style.animationDelay = Math.random() * 0.3 + 's';
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observar elementos para animación
+    document.querySelectorAll('.resource-card, .stat-card, .tool-card, .timeline-item, .report-item').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Tracking de enlaces externos
+    document.querySelectorAll('a[target="_blank"]').forEach(link => {
+      link.addEventListener('click', function(this: HTMLAnchorElement) {
+        const url = this.href;
+        const text = (this.textContent || '').trim();
+        console.log(`📊 Enlace externo visitado: ${text} - ${url}`);
+        
+        // Aquí podrías añadir tracking de analytics
+        // gtag('event', 'click', { event_category: 'external_link', event_label: text });
+      });
+    });
+
+    // Indicador de recursos cargados
+    const totalResources = document.querySelectorAll('.resource-card, .tool-card, .report-item').length;
+    console.log(`✅ Página de recursos cargada con ${totalResources} recursos disponibles`);
+  });
+</script>

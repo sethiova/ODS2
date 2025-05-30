@@ -1,0 +1,30 @@
+{
+  "name": "ods2-sitio-web",
+  "version": "1.0.0",
+  "description": "Sitio web informativo sobre el ODS 2 'Hambre Cero'",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^4.0.0",
+    "@astrojs/check": "^0.3.1",
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  },
+  "keywords": [
+    "ODS",
+    "Hambre Cero",
+    "accesibilidad",
+    "sitio web",
+    "desarrollo sostenible"
+  ],
+  "author": "Tu Nombre",
+  "license": "MIT"
+}

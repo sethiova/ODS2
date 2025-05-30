@@ -1,0 +1,430 @@
+---
+---
+
+<div id="accessibility-bar">
+  <div class="accessibility-container">
+    <button id="accessibility-toggle" class="accessibility-toggle" aria-expanded="false" aria-controls="accessibility-panel">
+      <span class="toggle-icon">♿</span>
+      <span class="toggle-text">Accesibilidad</span>
+      <span class="toggle-arrow">▼</span>
+    </button>
+    
+    <div id="accessibility-panel" class="accessibility-panel" aria-hidden="true">
+      <div class="panel-content">
+        
+        <!-- Sección compacta de controles -->
+        <div class="controls-grid">
+          <!-- Tamaño de fuente -->
+          <div class="control-group">
+            <label class="control-label">Texto</label>
+            <div class="button-row">
+              <button id="font-decrease" class="control-btn small" title="Disminuir texto">A-</button>
+              <button id="font-reset" class="control-btn small active" title="Tamaño normal">A</button>
+              <button id="font-increase" class="control-btn small" title="Aumentar texto">A+</button>
+            </div>
+          </div>
+
+          <!-- Tipo de fuente -->
+          <div class="control-group">
+            <label class="control-label">Fuente</label>
+            <select id="font-family" class="control-select compact">
+              <option value="default">Normal</option>
+              <option value="serif">Serif</option>
+              <option value="monospace">Mono</option>
+              <option value="dyslexic">Dislexia</option>
+            </select>
+          </div>
+
+          <!-- Modo oscuro -->
+          <div class="control-group">
+            <button id="dark-mode" class="control-toggle" title="Modo oscuro">
+              <span class="toggle-icon">🌙</span>
+              <span class="toggle-label">Oscuro</span>
+            </button>
+          </div>
+
+          <!-- Alto contraste -->
+          <div class="control-group">
+            <button id="high-contrast" class="control-toggle" title="Alto contraste">
+              <span class="toggle-icon">⚫</span>
+              <span class="toggle-label">Contraste</span>
+            </button>
+          </div>
+
+          <!-- Daltonismo -->
+          <div class="control-group">
+            <button id="daltonism-filter" class="control-toggle" title="Filtro daltonismo">
+              <span class="toggle-icon">🎨</span>
+              <span class="toggle-label">Daltonismo</span>
+            </button>
+          </div>
+
+          <!-- Cursor grande -->
+          <div class="control-group">
+            <button id="cursor-change" class="control-toggle" title="Cursor grande">
+              <span class="toggle-icon">🖱️</span>
+              <span class="toggle-label">Cursor</span>
+            </button>
+          </div>
+
+          <!-- Sin imágenes -->
+          <div class="control-group">
+            <button id="remove-images" class="control-toggle" title="Ocultar imágenes">
+              <span class="toggle-icon">🖼️</span>
+              <span class="toggle-label">Sin IMG</span>
+            </button>
+          </div>
+
+          <!-- Reset y ayuda -->
+          <div class="control-group actions">
+            <button id="reset-all" class="control-action reset" title="Restablecer todo">
+              <span class="action-icon">↻</span>
+              Reset
+            </button>
+          </div>
+
+          <div class="control-group actions">
+            <button id="help-accessibility" class="control-action help" title="Ayuda">
+              <span class="action-icon">?</span>
+              Ayuda
+            </button>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  #accessibility-bar {
+    background: linear-gradient(90deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #dee2e6;
+    position: relative;
+    z-index: 999;
+  }
+
+  .accessibility-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* Toggle Button - Más compacto */
+  .accessibility-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: linear-gradient(135deg, #4caf50, #45a049);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 0;
+    width: 100%;
+    justify-content: center;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+  }
+
+  .accessibility-toggle:hover {
+    background: linear-gradient(135deg, #45a049, #388e3c);
+    transform: translateY(-1px);
+  }
+
+  .accessibility-toggle[aria-expanded="true"] {
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+  }
+
+  .accessibility-toggle[aria-expanded="true"] .toggle-arrow {
+    transform: rotate(180deg);
+  }
+
+  .toggle-icon {
+    font-size: 1rem;
+  }
+
+  .toggle-text {
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  .toggle-arrow {
+    transition: transform 0.3s ease;
+    font-size: 0.7rem;
+    opacity: 0.8;
+  }
+
+  /* Panel compacto */
+  .accessibility-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #dee2e6;
+    border-top: none;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    display: none;
+    z-index: 998;
+    backdrop-filter: blur(10px);
+  }
+
+  .accessibility-panel[aria-hidden="false"] {
+    display: block;
+    animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .panel-content {
+    padding: 1rem;
+  }
+
+  /* Grid compacto */
+  .controls-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .control-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .control-group.actions {
+    grid-column: span 1;
+  }
+
+  .control-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+  }
+
+  /* Botones de texto */
+  .button-row {
+    display: flex;
+    gap: 2px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .control-btn.small {
+    background: #e9ecef;
+    color: #495057;
+    border: none;
+    padding: 0.3rem 0.5rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    min-width: 28px;
+    border-radius: 0;
+  }
+
+  .control-btn.small:hover {
+    background: #dee2e6;
+    transform: translateY(-1px);
+  }
+
+  .control-btn.small.active {
+    background: #4caf50;
+    color: white;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  /* Select compacto */
+  .control-select.compact {
+    padding: 0.3rem 0.4rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    background: white;
+    min-width: 80px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  /* Botones toggle */
+  .control-toggle {
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    color: #495057;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    min-width: 70px;
+    min-height: 60px;
+    justify-content: center;
+  }
+
+  .control-toggle:hover {
+    background: #e9ecef;
+    border-color: #4caf50;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  }
+
+  .control-toggle.active {
+    background: #4caf50;
+    border-color: #45a049;
+    color: white;
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+  }
+
+  .toggle-icon {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .toggle-label {
+    font-size: 0.65rem;
+    line-height: 1;
+    text-align: center;
+  }
+
+  /* Botones de acción */
+  .control-action {
+    background: linear-gradient(135deg, #6c757d, #5a6268);
+    color: white;
+    border: none;
+    padding: 0.4rem 0.6rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    min-width: 60px;
+    min-height: 50px;
+    justify-content: center;
+  }
+
+  .control-action:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+
+  .control-action.reset {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+  }
+
+  .control-action.reset:hover {
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.4);
+  }
+
+  .control-action.help {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+  }
+
+  .control-action.help:hover {
+    box-shadow: 0 4px 8px rgba(23, 162, 184, 0.4);
+  }
+
+  .action-icon {
+    font-size: 0.9rem;
+    font-weight: bold;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .controls-grid {
+      grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+      gap: 0.5rem;
+    }
+    
+    .control-toggle,
+    .control-action {
+      min-width: 60px;
+      min-height: 50px;
+      padding: 0.3rem;
+    }
+    
+    .toggle-label {
+      font-size: 0.6rem;
+    }
+    
+    .panel-content {
+      padding: 0.75rem;
+    }
+  }
+
+  /* Mejoras visuales */
+  .control-toggle.active::after {
+    content: "✓";
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 0.6rem;
+    background: rgba(255,255,255,0.9);
+    color: #4caf50;
+    border-radius: 50%;
+    width: 14px;
+    height: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  .control-toggle {
+    position: relative;
+  }
+
+  /* Animación de pulso para botones activos */
+  .control-toggle.active {
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4); }
+    50% { box-shadow: 0 6px 16px rgba(76, 175, 80, 0.6); }
+    100% { box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4); }
+  }
+
+  /* Reducir animaciones si el usuario lo prefiere */
+  @media (prefers-reduced-motion: reduce) {
+    .accessibility-panel[aria-hidden="false"] {
+      animation: none;
+    }
+    
+    .control-toggle.active {
+      animation: none;
+    }
+    
+    .control-btn,
+    .control-toggle,
+    .control-action {
+      transition: none;
+    }
+  }
+</style>s

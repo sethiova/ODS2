@@ -1,0 +1,784 @@
+---
+---
+
+<div id="floating-accessibility-button" class="floating-accessibility-btn">
+  <button 
+    id="floating-toggle" 
+    class="accessibility-float-btn" 
+    aria-label="Opciones de accesibilidad"
+    title="Opciones de Accesibilidad"
+  >
+    <svg class="accessibility-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="5" r="2" fill="currentColor"/>
+      <path d="M7 22v-6l1.5-4.5L7 8h10l-1.5 3.5L17 16v6h-2v-5l-1-2h-4l-1 2v5H7z" fill="currentColor"/>
+      <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+    </svg>
+    <span class="btn-pulse"></span>
+  </button>
+  
+  <div id="accessibility-hover-panel" class="accessibility-hover-panel">
+    <div class="panel-header">
+      <h3>♿ Accesibilidad</h3>
+    </div>
+    
+    <div class="controls-compact">
+      <!-- Tamaño de fuente -->
+      <div class="control-row">
+        <label class="control-label">Texto:</label>
+        <div class="button-group">
+          <button id="font-decrease-float" class="control-btn-mini" title="Disminuir texto (-3 niveles)">A-</button>
+          <button id="font-reset-float" class="control-btn-mini active" title="Tamaño normal">A</button>
+          <button id="font-increase-float" class="control-btn-mini" title="Aumentar texto (+3 niveles)">A+</button>
+        </div>
+        <span id="font-level-indicator" class="font-level">100%</span>
+      </div>
+
+      <!-- Tipo de fuente -->
+      <div class="control-row">
+        <label class="control-label">Fuente:</label>
+        <select id="font-family-float" class="font-select">
+          <option value="default">Normal</option>
+          <option value="serif">Serif</option>
+          <option value="monospace">Mono</option>
+          <option value="dyslexic">Dislexia</option>
+        </select>
+      </div>
+
+      <!-- Controles toggle -->
+      <div class="toggle-controls">
+        <button id="dark-mode-float" class="toggle-btn" title="Modo oscuro">
+          <span class="toggle-icon">🌙</span>
+          <span class="toggle-label">Oscuro</span>
+        </button>
+        <button id="high-contrast-float" class="toggle-btn" title="Alto contraste">
+          <span class="toggle-icon">⚫</span>
+          <span class="toggle-label">Contraste</span>
+        </button>
+        <button id="daltonism-filter-float" class="toggle-btn" title="Filtro daltonismo">
+          <span class="toggle-icon">🎨</span>
+          <span class="toggle-label">Daltonismo</span>
+        </button>
+        <button id="cursor-change-float" class="toggle-btn" title="Cursor grande">
+          <span class="toggle-icon">🖱️</span>
+          <span class="toggle-label">Cursor</span>
+        </button>
+        <button id="remove-images-float" class="toggle-btn" title="Ocultar imágenes">
+          <span class="toggle-icon">🖼️</span>
+          <span class="toggle-label">Sin IMG</span>
+        </button>
+        <button id="highlight-links-float" class="toggle-btn" title="Resaltar enlaces">
+          <span class="toggle-icon">🔗</span>
+          <span class="toggle-label">Enlaces</span>
+        </button>
+      </div>
+
+      <!-- Acciones -->
+      <div class="action-controls">
+        <button id="reset-all-float" class="action-btn reset" title="Restablecer todo">
+          <span class="action-icon">↻</span>
+          Reset
+        </button>
+        <button id="help-accessibility-float" class="action-btn help" title="Ayuda">
+          <span class="action-icon">?</span>
+          Ayuda
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Indicador de configuraciones activas -->
+<div id="accessibility-indicator" class="accessibility-indicator"></div>
+
+<style>
+  .floating-accessibility-btn {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    z-index: 10000;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .accessibility-float-btn {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(76, 175, 80, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .accessibility-float-btn:hover {
+    background: linear-gradient(135deg, #45a049 0%, #388e3c 100%);
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(76, 175, 80, 0.6);
+  }
+
+  .accessibility-icon {
+    width: 28px;
+    height: 28px;
+    transition: transform 0.3s ease;
+  }
+
+  .accessibility-float-btn:hover .accessibility-icon {
+    transform: rotate(10deg);
+  }
+
+  .btn-pulse {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%) scale(0);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    70% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
+  }
+
+  .accessibility-hover-panel {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: white;
+    border: 2px solid #4caf50;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    min-width: 250px;
+    z-index: 10001;
+    backdrop-filter: blur(10px);
+  }
+
+  .floating-accessibility-btn:hover .accessibility-hover-panel {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .accessibility-hover-panel:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .panel-header {
+    background: linear-gradient(135deg, #4caf50, #45a049);
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 10px 10px 0 0;
+    margin: -2px -2px 0 -2px;
+  }
+
+  .panel-header h3 {
+    margin: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .controls-compact {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .control-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .control-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #666;
+    min-width: 50px;
+  }
+
+  .button-group {
+    display: flex;
+    gap: 2px;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .control-btn-mini {
+    background: #e9ecef;
+    color: #495057;
+    border: none;
+    padding: 0.3rem 0.5rem;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    min-width: 28px;
+    border-radius: 0;
+    position: relative;
+  }
+
+  .control-btn-mini:hover {
+    background: #dee2e6;
+    transform: translateY(-1px);
+  }
+
+  .control-btn-mini.active {
+    background: #28a745;
+    color: white;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+    transform: scale(1.05);
+  }
+
+  .font-level {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #4caf50;
+    background: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    min-width: 45px;
+    text-align: center;
+  }
+
+  .font-select {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background: white;
+    min-width: 80px;
+  }
+
+  .toggle-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+
+  .toggle-btn {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    color: #495057;
+    padding: 0.5rem 0.3rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    min-height: 45px;
+    position: relative;
+  }
+
+  .toggle-btn:hover {
+    background: #e9ecef;
+    border-color: #4caf50;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .toggle-btn.active {
+    background: #28a745;
+    border-color: #1e7e34;
+    color: white;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.4);
+    transform: scale(1.05);
+  }
+
+  .toggle-icon {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .toggle-label {
+    font-size: 0.6rem;
+    line-height: 1;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .action-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .action-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    min-height: 40px;
+  }
+
+  .action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  }
+
+  .action-btn.reset {
+    background: #dc3545;
+  }
+
+  .action-btn.reset:hover {
+    background: #c82333;
+  }
+
+  .action-btn.help {
+    background: #17a2b8;
+  }
+
+  .action-btn.help:hover {
+    background: #138496;
+  }
+
+  .action-icon {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  .accessibility-hover-panel::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #4caf50;
+  }
+
+  @media (max-width: 768px) {
+    .floating-accessibility-btn {
+      top: 120px;
+      right: 15px;
+    }
+    
+    .accessibility-float-btn {
+      width: 50px;
+      height: 50px;
+    }
+    
+    .accessibility-icon {
+      width: 24px;
+      height: 24px;
+    }
+
+    .accessibility-hover-panel {
+      min-width: 220px;
+      right: -10px;
+    }
+
+    .toggle-controls {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .floating-accessibility-btn {
+    animation: bounceIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  @keyframes bounceIn {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Inicializando FloatingAccessibilityButton...');
+    
+    // Variables para mantener el estado
+    let currentSettings = {
+      fontLevel: 0, // -3 a +3
+      fontFamily: 'default',
+      darkMode: false,
+      highContrast: false,
+      daltonismFilter: false,
+      largeCursor: false,
+      hideImages: false,
+      highlightLinks: false
+    };
+
+    // Elementos DOM
+    const fontDecreaseFloat = document.getElementById('font-decrease-float');
+    const fontResetFloat = document.getElementById('font-reset-float');
+    const fontIncreaseFloat = document.getElementById('font-increase-float');
+    const fontFamilyFloat = document.getElementById('font-family-float');
+    const fontLevelIndicator = document.getElementById('font-level-indicator');
+    const accessibilityIndicator = document.getElementById('accessibility-indicator');
+
+    console.log('📋 Elementos encontrados:', {
+      fontDecreaseFloat: !!fontDecreaseFloat,
+      fontResetFloat: !!fontResetFloat,
+      fontIncreaseFloat: !!fontIncreaseFloat,
+      fontFamilyFloat: !!fontFamilyFloat,
+      fontLevelIndicator: !!fontLevelIndicator,
+      accessibilityIndicator: !!accessibilityIndicator
+    });
+
+    // Funciones auxiliares
+    function getFontPercentage() {
+      return Math.round((1 + (currentSettings.fontLevel * 0.25)) * 100);
+    }
+
+    function applyFontSize() {
+      const multiplier = 1 + (currentSettings.fontLevel * 0.25); // 25% por nivel
+      document.documentElement.style.fontSize = (16 * multiplier) + 'px';
+      
+      if (fontLevelIndicator) {
+        fontLevelIndicator.textContent = getFontPercentage() + '%';
+      }
+      
+      console.log('📏 Tamaño de fuente aplicado:', getFontPercentage() + '%');
+    }
+
+    function applyFontFamily() {
+      // Remover clases anteriores
+      document.body.classList.remove('font-serif', 'font-monospace', 'font-dyslexic');
+      
+      switch(currentSettings.fontFamily) {
+        case 'serif':
+          document.body.classList.add('font-serif');
+          break;
+        case 'monospace':
+          document.body.classList.add('font-monospace');
+          break;
+        case 'dyslexic':
+          document.body.classList.add('font-dyslexic');
+          break;
+        default:
+          // Fuente por defecto, no añadir clase
+          break;
+      }
+      
+      if (fontFamilyFloat) {
+        (fontFamilyFloat as HTMLSelectElement).value = currentSettings.fontFamily;
+      }
+      
+      console.log('🔤 Fuente aplicada:', currentSettings.fontFamily);
+    }
+
+    function updateFontButtons() {
+      // Actualizar estados de botones
+      const buttons = [fontDecreaseFloat, fontResetFloat, fontIncreaseFloat];
+      buttons.forEach(btn => {
+        if (btn) btn.classList.remove('active');
+      });
+
+      if (currentSettings.fontLevel === 0 && fontResetFloat) {
+        fontResetFloat.classList.add('active');
+      } else if (currentSettings.fontLevel < 0 && fontDecreaseFloat) {
+        fontDecreaseFloat.classList.add('active');
+      } else if (currentSettings.fontLevel > 0 && fontIncreaseFloat) {
+        fontIncreaseFloat.classList.add('active');
+      }
+    }
+
+    function saveSettings() {
+      try {
+        localStorage.setItem('accessibility-settings-v2', JSON.stringify(currentSettings));
+        console.log('💾 Configuraciones guardadas:', currentSettings);
+      } catch (error) {
+        console.warn('❌ No se pudieron guardar las configuraciones:', error);
+      }
+    }
+
+    function loadSettings() {
+      try {
+        const saved = localStorage.getItem('accessibility-settings-v2');
+        if (saved) {
+          currentSettings = Object.assign(currentSettings, JSON.parse(saved));
+          console.log('📥 Configuraciones cargadas:', currentSettings);
+        }
+      } catch (error) {
+        console.warn('❌ No se pudieron cargar las configuraciones:', error);
+      }
+    }
+
+    function showIndicator(message: string) {
+      if (accessibilityIndicator) {
+        accessibilityIndicator.textContent = message;
+        accessibilityIndicator.classList.add('show');
+        
+        setTimeout(function() {
+          accessibilityIndicator.classList.remove('show');
+        }, 2000);
+      }
+      console.log('📢 Indicador:', message);
+    }
+
+    function applyAllSettings() {
+      console.log('🔄 Aplicando todas las configuraciones...');
+      
+      // Aplicar tamaño de fuente
+      applyFontSize();
+      
+      // Aplicar familia de fuente
+      applyFontFamily();
+      
+      // Aplicar todas las clases según configuraciones
+      const toggles = [
+        { setting: 'darkMode', className: 'accessibility-dark-mode', buttonId: 'dark-mode-float' },
+        { setting: 'highContrast', className: 'accessibility-high-contrast', buttonId: 'high-contrast-float' },
+        { setting: 'daltonismFilter', className: 'accessibility-daltonism-filter', buttonId: 'daltonism-filter-float' },
+        { setting: 'largeCursor', className: 'accessibility-large-cursor', buttonId: 'cursor-change-float' },
+        { setting: 'hideImages', className: 'accessibility-hide-images', buttonId: 'remove-images-float' },
+        { setting: 'highlightLinks', className: 'accessibility-highlight-text', buttonId: 'highlight-links-float' }
+      ];
+
+      toggles.forEach(function(toggle) {
+        if (toggle.setting in currentSettings && currentSettings[toggle.setting as keyof typeof currentSettings]) {
+          document.body.classList.add(toggle.className);
+          const button = document.getElementById(toggle.buttonId);
+          if (button) button.classList.add('active');
+        } else {
+          document.body.classList.remove(toggle.className);
+          const button = document.getElementById(toggle.buttonId);
+          if (button) button.classList.remove('active');
+        }
+      });
+      
+      // Actualizar botones
+      updateFontButtons();
+    }
+
+    // Cargar configuraciones guardadas
+    loadSettings();
+    applyAllSettings();
+
+    // Event listeners para controles de fuente
+    if (fontDecreaseFloat) {
+      fontDecreaseFloat.addEventListener('click', function() {
+        console.log('🔽 Disminuir fuente clickeado');
+        if (currentSettings.fontLevel > -3) {
+          currentSettings.fontLevel--;
+          applyFontSize();
+          updateFontButtons();
+          saveSettings();
+          showIndicator('Texto: ' + getFontPercentage() + '%');
+        }
+      });
+      console.log('✅ Event listener añadido a font-decrease-float');
+    } else {
+      console.log('❌ No se encontró font-decrease-float');
+    }
+
+    if (fontResetFloat) {
+      fontResetFloat.addEventListener('click', function() {
+        console.log('🔄 Reset fuente clickeado');
+        currentSettings.fontLevel = 0;
+        applyFontSize();
+        updateFontButtons();
+        saveSettings();
+        showIndicator('Texto: 100% (Normal)');
+      });
+      console.log('✅ Event listener añadido a font-reset-float');
+    } else {
+      console.log('❌ No se encontró font-reset-float');
+    }
+
+    if (fontIncreaseFloat) {
+      fontIncreaseFloat.addEventListener('click', function() {
+        console.log('🔼 Aumentar fuente clickeado');
+        if (currentSettings.fontLevel < 3) {
+          currentSettings.fontLevel++;
+          applyFontSize();
+          updateFontButtons();
+          saveSettings();
+          showIndicator('Texto: ' + getFontPercentage() + '%');
+        }
+      });
+      console.log('✅ Event listener añadido a font-increase-float');
+    } else {
+      console.log('❌ No se encontró font-increase-float');
+    }
+
+    if (fontFamilyFloat) {
+      fontFamilyFloat.addEventListener('change', function() {
+        const selectElement = this as HTMLSelectElement;
+        console.log('🔤 Cambio de fuente:', selectElement.value);
+        currentSettings.fontFamily = selectElement.value;
+        applyFontFamily();
+        saveSettings();
+        showIndicator('Fuente: ' + selectElement.options[selectElement.selectedIndex].text);
+      });
+      console.log('✅ Event listener añadido a font-family-float');
+    } else {
+      console.log('❌ No se encontró font-family-float');
+    }
+
+    // Controles toggle
+    const toggleButtons = [
+      { id: 'dark-mode-float', setting: 'darkMode', className: 'accessibility-dark-mode', label: 'Modo Oscuro' },
+      { id: 'high-contrast-float', setting: 'highContrast', className: 'accessibility-high-contrast', label: 'Alto Contraste' },
+      { id: 'daltonism-filter-float', setting: 'daltonismFilter', className: 'accessibility-daltonism-filter', label: 'Filtro Daltonismo' },
+      { id: 'cursor-change-float', setting: 'largeCursor', className: 'accessibility-large-cursor', label: 'Cursor Grande' },
+      { id: 'remove-images-float', setting: 'hideImages', className: 'accessibility-hide-images', label: 'Ocultar Imágenes' },
+      { id: 'highlight-links-float', setting: 'highlightLinks', className: 'accessibility-highlight-text', label: 'Resaltar Enlaces' }
+    ];
+
+    toggleButtons.forEach(function(toggleConfig) {
+      const button = document.getElementById(toggleConfig.id);
+      if (button) {
+        button.addEventListener('click', function() {
+          console.log('🎛️ Toggle clickeado:', toggleConfig.label);
+          if (toggleConfig.setting in currentSettings) {
+            const setting = toggleConfig.setting as keyof typeof currentSettings;
+            (currentSettings as any)[setting] = !(currentSettings as any)[setting];
+          }
+          
+          if (toggleConfig.setting in currentSettings && currentSettings[toggleConfig.setting as keyof typeof currentSettings]) {
+            document.body.classList.add(toggleConfig.className);
+            button.classList.add('active');
+            showIndicator(toggleConfig.label + ': Activado');
+          } else {
+            document.body.classList.remove(toggleConfig.className);
+            button.classList.remove('active');
+            showIndicator(toggleConfig.label + ': Desactivado');
+          }
+          
+          saveSettings();
+        });
+        console.log('✅ Event listener añadido a', toggleConfig.id);
+      } else {
+        console.log('❌ No se encontró', toggleConfig.id);
+      }
+    });
+
+    // Reset y ayuda
+    const resetAllFloat = document.getElementById('reset-all-float');
+    if (resetAllFloat) {
+      resetAllFloat.addEventListener('click', function() {
+        console.log('🔄 Reset todo clickeado');
+        if (confirm('¿Restablecer todas las configuraciones de accesibilidad?')) {
+          // Limpiar localStorage
+          try {
+            localStorage.removeItem('accessibility-settings-v2');
+          } catch (error) {
+            console.warn('❌ No se pudo limpiar localStorage:', error);
+          }
+          
+          // Remover todas las clases
+          document.body.classList.remove(
+            'font-serif', 'font-monospace', 'font-dyslexic',
+            'accessibility-dark-mode', 'accessibility-high-contrast',
+            'accessibility-daltonism-filter', 'accessibility-large-cursor',
+            'accessibility-hide-images', 'accessibility-highlight-text'
+          );
+          
+          // Restablecer font size
+          document.documentElement.style.fontSize = '';
+          
+          // Reset variables
+          currentSettings = {
+            fontLevel: 0,
+            fontFamily: 'default',
+            darkMode: false,
+            highContrast: false,
+            daltonismFilter: false,
+            largeCursor: false,
+            hideImages: false,
+            highlightLinks: false
+          };
+          
+          // Actualizar UI
+          applyAllSettings();
+          
+          // Limpiar estados activos
+          document.querySelectorAll('.toggle-btn, .control-btn-mini').forEach(function(btn) {
+            btn.classList.remove('active');
+          });
+          
+          if (fontResetFloat) fontResetFloat.classList.add('active');
+          
+          showIndicator('Configuraciones restablecidas');
+        }
+      });
+      console.log('✅ Event listener añadido a reset-all-float');
+    } else {
+      console.log('❌ No se encontró reset-all-float');
+    }
+
+    const helpFloat = document.getElementById('help-accessibility-float');
+    if (helpFloat) {
+      helpFloat.addEventListener('click', function() {
+        console.log('❓ Ayuda clickeada');
+        const helpText = `🛠️ HERRAMIENTAS DE ACCESIBILIDAD
+
+📝 TAMAÑO DE TEXTO:
+• A- : Reducir hasta 3 niveles (75%)
+• A : Tamaño normal (100%)
+• A+ : Aumentar hasta 3 niveles (175%)
+
+🔤 FUENTE:
+• Normal: Inter (por defecto)
+• Serif: Georgia para mejor lectura
+• Mono: Courier para código/números
+• Dislexia: OpenDyslexic para dislexia
+
+🎨 VISUALIZACIÓN:
+• 🌙 Modo Oscuro: Reduce fatiga visual
+• ⚫ Alto Contraste: Mejora visibilidad
+• 🎨 Daltonismo: Filtro especial
+• 🖱️ Cursor Grande: Cursor más visible
+• 🖼️ Sin Imágenes: Oculta imágenes
+• 🔗 Enlaces: Resalta y desactiva enlaces
+
+🔄 RESET: Restaura todo a valores por defecto
+❓ AYUDA: Esta información
+
+💾 Todas las configuraciones se guardan automáticamente
+
+⌨️ ATAJOS:
+• Ctrl + (+) : Zoom del navegador
+• Ctrl + (-) : Reducir zoom
+• Tab : Navegar con teclado
+• Escape : Cerrar menús`;
+
+        alert(helpText);
+      });
+      console.log('✅ Event listener añadido a help-accessibility-float');
+    } else {
+      console.log('❌ No se encontró help-accessibility-float');
+    }
+
+    console.log('✅ FloatingAccessibilityButton inicializado correctamente');
+    console.log('🎯 Configuración actual:', currentSettings);
+  });
+</script>

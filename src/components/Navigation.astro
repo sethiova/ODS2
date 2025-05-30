@@ -1,0 +1,325 @@
+---
+---
+
+<div class="sticky-nav-container">
+  <nav class="main-navigation" role="navigation" aria-label="Navegación principal">
+    <div class="nav-container-full">
+      <div class="nav-content">
+        <div class="nav-brand">
+          <a href="/" class="brand-link">
+            <span class="brand-icon">🌱</span>
+            <div class="brand-text">
+              <span class="brand-title">ODS 2</span>
+              <span class="brand-subtitle">Hambre Cero</span>
+            </div>
+          </a>
+        </div>
+        
+        <button class="mobile-menu-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Menú de navegación">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+        
+        <ul id="nav-menu" class="nav-menu">
+          <li class="nav-item">
+            <a href="/" class="nav-link">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a href="/informacion" class="nav-link">Información</a>
+          </li>
+          <li class="nav-item">
+            <a href="/recursos" class="nav-link">Recursos</a>
+          </li>
+          <li class="nav-item">
+            <a href="/cv" class="nav-link">CV</a>
+          </li>
+          <li class="nav-item">
+            <a href="/contacto" class="nav-link nav-link-cta">Contacto</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<style>
+  .main-navigation {
+    background: white;
+    border-bottom: none;
+    position: relative;
+    z-index: 999;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Contenedor que ocupa todo el ancho */
+  .nav-container-full {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .nav-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+  }
+  
+  .nav-brand .brand-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: #2e7d32;
+    font-weight: 700;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .nav-brand .brand-link:hover {
+    transform: scale(1.05);
+    text-decoration: none;
+  }
+  
+  .brand-icon {
+    font-size: 1.8rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  }
+  
+  /* Nuevo: Mejorar el branding */
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+  }
+  
+  .brand-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #2e7d32;
+  }
+  
+  .brand-subtitle {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #4caf50;
+    margin-top: -2px;
+  }
+  
+  .mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    padding: 0.5rem;
+    gap: 4px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+  }
+  
+  .mobile-menu-toggle:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .hamburger-line {
+    width: 25px;
+    height: 3px;
+    background-color: #2e7d32;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+  }
+  
+  .mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+  }
+  
+  .mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(2) {
+    opacity: 0;
+  }
+  
+  .mobile-menu-toggle[aria-expanded="true"] .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+  
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 2rem;
+    align-items: center;
+  }
+  
+  .nav-item {
+    margin: 0;
+  }
+  
+  .nav-link {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.5rem 0;
+    transition: all 0.3s ease;
+    position: relative;
+    border-bottom: 2px solid transparent;
+  }
+  
+  .nav-link:hover {
+    color: #2e7d32;
+    border-bottom-color: #4caf50;
+    text-decoration: none;
+  }
+  
+  .nav-link.active {
+    color: #2e7d32;
+    border-bottom-color: #4caf50;
+    font-weight: 600;
+  }
+  
+  .nav-link-cta {
+    background: #4caf50;
+    color: white !important;
+    padding: 0.6rem 1.5rem !important;
+    border-radius: 6px;
+    border: none !important;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-link-cta:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    color: white !important;
+    text-decoration: none;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .mobile-menu-toggle {
+      display: flex;
+    }
+    
+    .nav-menu {
+      position: fixed;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      flex-direction: column;
+      gap: 0;
+      padding: 1rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transform: translateY(-100%);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+    
+    .nav-menu.active {
+      transform: translateY(0);
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .nav-item {
+      width: 100%;
+      text-align: center;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .nav-item:last-child {
+      border-bottom: none;
+    }
+    
+    .nav-link {
+      display: block;
+      padding: 1rem;
+      font-size: 1.1rem;
+      border-bottom: none;
+    }
+    
+    .nav-link-cta {
+      margin-top: 1rem;
+      display: inline-block;
+      border-radius: 8px;
+    }
+    
+    .brand-title {
+      font-size: 1.2rem;
+    }
+    
+    .brand-subtitle {
+      font-size: 0.7rem;
+    }
+    
+    .brand-icon {
+      font-size: 1.5rem;
+    }
+  }
+  
+  /* Estados de focus */
+  .nav-link:focus {
+    outline: 2px solid #4caf50;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  
+  .mobile-menu-toggle:focus {
+    outline: 2px solid #4caf50;
+    outline-offset: 2px;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (mobileToggle && navMenu) {
+      mobileToggle.addEventListener('click', function(this: HTMLElement) {
+        const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        
+        this.setAttribute('aria-expanded', (!isExpanded).toString());
+        navMenu.classList.toggle('active');
+        
+        // Prevenir scroll del body cuando el menú está abierto
+        document.body.style.overflow = !isExpanded ? 'hidden' : '';
+      });
+    }
+    
+    // Cerrar menú al hacer click en un enlace
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        if (navMenu && navMenu.classList.contains('active')) {
+          navMenu.classList.remove('active');
+            if (mobileToggle) {
+            mobileToggle.setAttribute('aria-expanded', 'false');
+            }
+          document.body.style.overflow = '';
+        }
+      });
+    });
+    
+    // Cerrar menú al redimensionar ventana
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768) {
+        if (navMenu) {
+          navMenu.classList.remove('active');
+        }
+        if (mobileToggle) {
+          mobileToggle.setAttribute('aria-expanded', 'false');
+        }
+        document.body.style.overflow = '';
+      }
+    });
+  });
+</script>

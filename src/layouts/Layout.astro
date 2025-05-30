@@ -1,0 +1,199 @@
+---
+import Navigation from '../components/Navigation.astro';
+import AccessibilityBar from '../components/AccessibilityBar.astro';
+import FloatingAccessibilityButton from '../components/FloatingAccessibilityButton.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Sitio web educativo sobre el ODS 2 - Hambre Cero. Información, recursos y herramientas para combatir el hambre mundial." } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Security Meta Tags -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.emailjs.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.emailjs.com;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    
+    <!-- SEO and Social -->
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:site_name" content="ODS 2 - Hambre Cero">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content={title}>
+    <meta name="twitter:description" content={description}>
+    
+    <!-- DNS Prefetch for Performance and Security -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="//api.emailjs.com">
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    
+    <!-- Fonts with integrity check -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=OpenDyslexic:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/styles/global.css">
+    <link rel="stylesheet" href="/styles/accessibility.css">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "ODS 2 - Hambre Cero",
+      "description": "Sitio web educativo sobre el Objetivo de Desarrollo Sostenible 2",
+      "url": "https://tu-dominio.com",
+      "inLanguage": "es",
+      "creator": {
+        "@type": "Person",
+        "name": "Maximiliano Alexander Mendoza López"
+      }
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Saltar al contenido principal</a>
+    
+    <!-- Noscript fallback -->
+    <noscript>
+      <div style="background: #f44336; color: white; padding: 1rem; text-align: center;">
+        Este sitio requiere JavaScript para funcionar correctamente. Por favor, habilítalo en tu navegador.
+      </div>
+    </noscript>
+    
+    <!-- Navigation -->
+    <div class="sticky-nav-container">
+      <Navigation />
+    </div>
+    
+    <!-- Floating Accessibility Button -->
+    <FloatingAccessibilityButton />
+    
+    <main id="main-content">
+      <slot />
+    </main>
+    
+    <Footer />
+    
+    <!-- Security Script -->
+    <script src="/scripts/accessibility.js" is:inline></script>
+  </body>
+</html>
+
+<!-- Security Styles -->
+<style>
+  /* Prevent right-click context menu in production (optional) */
+  /* Uncomment only if extremely necessary
+  body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+  */
+  
+  /* Hide source code indicators */
+  .astro-dev-toolbar {
+    display: none !important;
+  }
+  
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    scroll-padding-top: 120px;
+    height: 100%;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background-color: #ffffff;
+    color: #333333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .skip-link {
+    position: fixed;
+    top: -100px;
+    left: 20px;
+    background: #2e7d32;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    z-index: 10001;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    border: 2px solid #4caf50;
+    font-size: 1rem;
+  }
+
+  .skip-link:focus {
+    top: 20px;
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    outline: 3px solid #81c784;
+    outline-offset: 2px;
+  }
+
+  .skip-link:hover {
+    color: white;
+    text-decoration: none;
+  }
+
+  main {
+    margin-top: 0;
+    padding-top: 80px;  /* Espacio para el navbar */
+    flex: 1;
+    min-height: calc(100vh - 200px);
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  @media (max-width: 768px) {
+    main {
+      padding-top: 100px;  /* Más espacio en móvil */
+      min-height: calc(100vh - 220px);
+    }
+    
+    html {
+      scroll-padding-top: 140px;
+    }
+    
+    .skip-link {
+      left: 10px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+    }
+  }
+</style>

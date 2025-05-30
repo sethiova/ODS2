@@ -1,0 +1,400 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="ODS 2 - Hambre Cero | Inicio">
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1>Bienvenido al ODS 2: Hambre Cero</h1>
+      <p class="hero-subtitle">
+        Poner fin al hambre, lograr la seguridad alimentaria y la mejora de la nutrición y promover la agricultura sostenible
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">828 millones</span>
+          <span class="stat-label">de personas padecen hambre</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">3.1 mil millones</span>
+          <span class="stat-label">no pueden permitirse una dieta saludable</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">149 millones</span>
+          <span class="stat-label">de niños sufren retraso del crecimiento</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="intro-section">
+    <div class="container">
+      <h2>¿Qué es el ODS 2?</h2>
+      <div class="intro-grid">
+        <div class="intro-text">
+          <p>
+            El Objetivo de Desarrollo Sostenible 2 busca poner fin al hambre, lograr la seguridad alimentaria, 
+            mejorar la nutrición y promover la agricultura sostenible para el año 2030.
+          </p>
+          <p>
+            Este objetivo reconoce que el hambre y la malnutrición son problemas complejos que requieren 
+            soluciones integrales que aborden tanto las causas inmediatas como las estructurales.
+          </p>
+        </div>
+        <div class="intro-image">
+          <img src="/images/ods2-icon.svg" alt="Icono del ODS 2 - Hambre Cero" width="200" height="200">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="targets-section">
+    <div class="container">
+      <h2>Metas del ODS 2</h2>
+      <div class="targets-grid">
+        <div class="target-card">
+          <div class="target-number">2.1</div>
+          <h3>Acceso a alimentos</h3>
+          <p>Poner fin al hambre y asegurar el acceso de todas las personas a una alimentación sana, nutritiva y suficiente durante todo el año.</p>
+        </div>
+        
+        <div class="target-card">
+          <div class="target-number">2.2</div>
+          <h3>Malnutrición</h3>
+          <p>Poner fin a todas las formas de malnutrición, incluso logrando las metas convenidas internacionalmente sobre el retraso del crecimiento.</p>
+        </div>
+        
+        <div class="target-card">
+          <div class="target-number">2.3</div>
+          <h3>Productividad agrícola</h3>
+          <p>Duplicar la productividad agrícola y los ingresos de los productores de alimentos en pequeña escala.</p>
+        </div>
+        
+        <div class="target-card">
+          <div class="target-number">2.4</div>
+          <h3>Agricultura sostenible</h3>
+          <p>Asegurar la sostenibilidad de los sistemas de producción de alimentos y aplicar prácticas agrícolas resilientes.</p>
+        </div>
+        
+        <div class="target-card">
+          <div class="target-number">2.5</div>
+          <h3>Diversidad genética</h3>
+          <p>Mantener la diversidad genética de las semillas, las plantas cultivadas y los animales de granja.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="action-section">
+    <div class="container">
+      <h2>¿Cómo puedes contribuir?</h2>
+      <div class="action-grid">
+        <div class="action-item">
+          <span class="action-icon">🥬</span>
+          <h3>Consume responsablemente</h3>
+          <p>Reduce el desperdicio de alimentos y elige productos locales y sostenibles.</p>
+        </div>
+        
+        <div class="action-item">
+          <span class="action-icon">🌱</span>
+          <h3>Apoya la agricultura local</h3>
+          <p>Compra directamente a productores locales y apoya prácticas agrícolas sostenibles.</p>
+        </div>
+        
+        <div class="action-item">
+          <span class="action-icon">📚</span>
+          <h3>Edúcate y comparte</h3>
+          <p>Aprende sobre seguridad alimentaria y comparte información con tu comunidad.</p>
+        </div>
+        
+        <div class="action-item">
+          <span class="action-icon">🤝</span>
+          <h3>Participa en tu comunidad</h3>
+          <p>Únete a organizaciones que trabajen contra el hambre y la malnutrición.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-content">
+        <h2>Únete a la lucha contra el hambre</h2>
+        <p>Conoce más sobre este importante objetivo y cómo puedes hacer la diferencia.</p>
+        <div class="cta-buttons">
+          <a href="/informacion" class="btn-primary">Más información</a>
+          <a href="/recursos" class="btn-secondary">Ver recursos</a>
+          <a href="/contacto" class="btn-tertiary">Contáctanos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    background: linear-gradient(135deg, #2e7d32, #4caf50, #81c784);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .hero-section h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 3rem;
+    opacity: 0.95;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .stat-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+  }
+
+  .stat-number {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffeb3b;
+  }
+
+  .stat-label {
+    display: block;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  /* Intro Section */
+  .intro-section {
+    padding: 4rem 0;
+    background: #f8f9fa;
+  }
+
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .intro-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .intro-image {
+    text-align: center;
+  }
+
+  .intro-image img {
+    max-width: 100%;
+    height: auto;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+  }
+
+  /* Targets Section */
+  .targets-section {
+    padding: 4rem 0;
+  }
+
+  .targets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .target-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-left: 4px solid #4caf50;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .target-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+
+  .target-number {
+    display: inline-block;
+    background: #4caf50;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .target-card h3 {
+    color: #2e7d32;
+    margin-bottom: 1rem;
+  }
+
+  /* Action Section */
+  .action-section {
+    padding: 4rem 0;
+    background: #f8f9fa;
+  }
+
+  .action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .action-item {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .action-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .action-item h3 {
+    color: #2e7d32;
+    margin-bottom: 1rem;
+  }
+
+  /* CTA Section */
+  .cta-section {
+    padding: 4rem 0;
+    background: #2e7d32;
+    color: white;
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    margin-bottom: 1rem;
+  }
+
+  .cta-content p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-tertiary {
+    display: inline-block;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .btn-primary {
+    background: #4caf50;
+    color: white;
+  }
+
+  .btn-primary:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+  }
+
+  .btn-secondary:hover {
+    background: white;
+    color: #2e7d32;
+  }
+
+  .btn-tertiary {
+    background: #81c784;
+    color: white;
+  }
+
+  .btn-tertiary:hover {
+    background: #66bb6a;
+  }
+
+  h2 {
+    color: #2e7d32;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-section h1 {
+      font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.1rem;
+    }
+    
+    .hero-stats {
+      grid-template-columns: 1fr;
+    }
+    
+    .intro-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .btn-primary,
+    .btn-secondary,
+    .btn-tertiary {
+      width: 200px;
+    }
+  }
+</style>
